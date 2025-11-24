@@ -2,7 +2,7 @@
 
 /**
  * 1. Fetching Product Catalog
- * ---Simulates getting a list of product from database.
+ * --- Simulates getting a list of product from database.
  * - Succes: Returns a list of items (Laptop, Headphones) after 1 second.
  * - Failure: Ramdonly fails 10% of the time.
  */
@@ -50,5 +50,30 @@ export const fetchProductReviews = (productId: number): Promise<{ productId: num
                 reject(`Failed to fetch reviews for product ID ${productId}`);
             }
         }, 1500); // --- 1.5 seconds delay
+    });
+};
+
+/**
+ * 3. Fetch Sales Report
+ * --- Simulates getting a summary of all sales
+ * - Success: Return sales stats after 1 second
+ * - Failure: Ramdonly fails 10% of the time
+ */
+
+export const fetchSalesReport = (): Promise<{ totalSales: number; unitSold: number; averagePrice: number }> => {
+    return new Promise((resolve, reject) => {
+        console.log(`"Simulating: Fetching sales report..."`);
+
+        setTimeout(() => {
+            if (Math.random() < 0.9) {
+                resolve({
+                    totalSales: 50000,
+                    unitSold: 150,
+                    averagePrice: 333,
+                });
+            } else {
+                reject("Failed to fetch sales report");
+            }
+        }, 1000); // --- 1 second delay
     });
 };
