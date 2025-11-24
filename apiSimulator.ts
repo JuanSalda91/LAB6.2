@@ -2,7 +2,7 @@
 
 /**
  * 1. Fetching Product Catalog
- * Simulates getting a list of product from database.
+ * ---Simulates getting a list of product from database.
  * - Succes: Returns a list of items (Laptop, Headphones) after 1 second.
  * - Failure: Ramdonly fails 10% of the time.
  */
@@ -30,4 +30,25 @@ export const fecthProductCatalog = (): Promise<{ id: number; name: string; price
 
 /**
  * 2. Fetch Product Reviews
+ * --- Simulates getting reviews for a specific product.
+ * - Input: Product (number)
+ * - Success: Returns a list of views after 1.5 seconds
+ * - Faulure: Ramdonly fails 10% of the time
  */
+
+export const fetchProductReviews = (productId: number): Promise<{ productId: number; review: string } []> => {
+    return new Promise((resolve, reject) => {
+        console.log(`Simulating: Fetching reviews for product ID ${productId}...`);
+
+        setTimeout(() => {
+            if (Math.random() < 0.9) {
+                resolve([
+                    { productId: productId, review: "Great product!" },
+                    { productId: productId, review: "Good value for the money." },
+                ]);
+            } else {
+                reject(`Failed to fetch reviews for product ID ${productId}`);
+            }
+        }, 1500); // --- 1.5 seconds delay
+    });
+};
